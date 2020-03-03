@@ -1,0 +1,13 @@
+Eclipse Paho - version 1.0.2
+
+Copyright (c) Eclipse Paho contributors
+Eclipse Paho distributed under the terms of EPL 1.0 (https://raw.githubusercontent.com/eclipse/paho.mqtt.java/master/epl-v10)
+
+
+Google GSON - version 2.7
+
+Copyright (C) 2009 Google Inc.
+Licensed under the Apache License, Version 2.0 (the "License")
+https://github.com/google/gson/blob/master/gson/LICENSE
+
+/--/

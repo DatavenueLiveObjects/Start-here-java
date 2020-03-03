@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.orange.liveobjects</groupId>
+    <artifactId>lo-samples</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Live Objects :: code samples</name>
+    <version>0.1-SNAPSHOT</version>
+
+    <inceptionYear>2016</inceptionYear>
+    <organization>
+        <name>Orange</name>
+    </organization>
+    <licenses>
+        <license>
+            <name>BSD-3</name>
+            <url>https://raw.githubusercontent.com/Orange-OpenSource/LiveObjects-samples-java/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>01-samples_mqtt</module>
+    </modules>
+
+</project>
