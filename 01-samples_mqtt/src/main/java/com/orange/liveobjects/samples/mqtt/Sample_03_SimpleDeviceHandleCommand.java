@@ -10,10 +10,14 @@ package com.orange.liveobjects.samples.mqtt;
 import com.google.gson.Gson;
 import com.orange.liveobjects.samples.utils.DeviceCommand;
 import com.orange.liveobjects.samples.utils.DeviceCommandResponse;
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-
 import java.util.HashMap;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 /**
  * Device connects to LO and handles a single command, then disconnects.
@@ -35,10 +39,12 @@ public class Sample_03_SimpleDeviceHandleCommand {
             this.mqttClient = mqttClient;
         }
 
+        @Override
         public void connectionLost(Throwable throwable) {
             System.out.println("Connection lost");
         }
 
+        @Override
         public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
             System.out.println("Received message (i.e. command) - " + mqttMessage);
 
@@ -49,12 +55,13 @@ public class Sample_03_SimpleDeviceHandleCommand {
             // return response
             final DeviceCommandResponse response = new DeviceCommandResponse();
             response.cid = command.cid;
-            response.res = new HashMap<String, Object>();
+            response.res = new HashMap<>();
             response.res.put("msg", "hello friend!");
             response.res.put("method", command.req);
             response.res.put("counter", this.counter++);
 
             new Thread(new Runnable() {
+                @Override
                 public void run() {
                     try {
                         mqttClient.publish("dev/cmd/res", gson.toJson(response).getBytes(), 0, false);
@@ -71,6 +78,7 @@ public class Sample_03_SimpleDeviceHandleCommand {
 
         }
 
+        @Override
         public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
             System.out.println("Message delivered");
         }
@@ -99,7 +107,7 @@ public class Sample_03_SimpleDeviceHandleCommand {
 
         String API_KEY = "<<< REPLACE WITH valid API key value>>>"; // <-- REPLACE!
 
-        String SERVER = "tcp://liveobjects.orange-business.com:1883";
+        String SERVER = "ssl://liveobjects.orange-business.com:8883";
         String DEVICE_URN = "urn:lo:nsid:sensor:XX56765";
         int KEEP_ALIVE_INTERVAL = 30;// Must be <= 50
 

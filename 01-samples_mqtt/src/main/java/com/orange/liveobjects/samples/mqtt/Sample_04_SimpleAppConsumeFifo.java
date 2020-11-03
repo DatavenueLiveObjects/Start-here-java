@@ -7,10 +7,14 @@
  */
 package com.orange.liveobjects.samples.mqtt;
 
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-
 import java.util.UUID;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 /**
  * Application connects to LO in MQTT and consumes messages from a FIFO queue.
@@ -21,7 +25,7 @@ import java.util.UUID;
  * https://liveobjects.orange-business.com/doc/html/lo_manual_v2.html#MESSAGE_ROUTING)
  *
  */
-public class Sample_11_SimpleAppConsumeFifo {
+public class Sample_04_SimpleAppConsumeFifo {
 
     final static String TOPIC_FIFO = "fifo/alarm";
 
@@ -35,18 +39,22 @@ public class Sample_11_SimpleAppConsumeFifo {
             this.mqttClient = mqttClient;
         }
 
+        @Override
         public void connectionLost(Throwable throwable) {
             System.out.println("Connection lost");
         }
 
+        @Override
         public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
             System.out.println("Received message from FIFO queue - " + mqttMessage);
         }
 
+        @Override
         public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
             // nothing
         }
 
+        @Override
         public void connectComplete(boolean b, String s) {
             System.out.println("Connection is established");
             try {
@@ -68,7 +76,7 @@ public class Sample_11_SimpleAppConsumeFifo {
 
         String API_KEY = "<<< REPLACE WITH valid API key value with Application profile>>>"; // <-- REPLACE!
 
-        String SERVER = "tcp://liveobjects.orange-business.com:1883";
+        String SERVER = "ssl://liveobjects.orange-business.com:8883";
         String APP_ID = "app:" + UUID.randomUUID().toString();
         int KEEP_ALIVE_INTERVAL = 30;// Must be <= 50
 

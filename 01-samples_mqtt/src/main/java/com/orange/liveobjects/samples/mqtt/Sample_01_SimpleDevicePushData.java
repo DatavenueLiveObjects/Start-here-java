@@ -9,15 +9,14 @@ package com.orange.liveobjects.samples.mqtt;
 
 import com.google.gson.Gson;
 import com.orange.liveobjects.samples.utils.DeviceData;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
 
 public class Sample_01_SimpleDevicePushData {
 
@@ -26,7 +25,7 @@ public class Sample_01_SimpleDevicePushData {
         Random rand = new Random();
         String API_KEY = "<<< REPLACE WITH valid API key value with Mqtt Device profile>>>"; // <-- REPLACE!
 
-        String SERVER = "tcp://liveobjects.orange-business.com:1883";
+        String SERVER = "ssl://liveobjects.orange-business.com:8883";
         String DEVICE_URN = "urn:lo:nsid:sensor:XX56765";
         int KEEP_ALIVE_INTERVAL = 30;// Must be <= 50
 
@@ -35,7 +34,7 @@ public class Sample_01_SimpleDevicePushData {
         // streamId
         data.s = "test";
         // value: JSON object...
-        data.v = new HashMap<String, Object>();
+        data.v = new HashMap<>();
         data.v.put("tempC", ((int) (rand.nextDouble() * 3000)) * 0.01 - 5);
         data.v.put("engineOn", rand.nextBoolean());
         // location (lat/lon)

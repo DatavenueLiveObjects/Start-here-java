@@ -21,7 +21,7 @@ public class Sample_02_SimpleDevicePushConfig {
 
         String API_KEY = "<<< REPLACE WITH valid API key value with Mqtt Device profile>>>"; // <-- REPLACE!
 
-        String SERVER = "tcp://liveobjects.orange-business.com:1883";
+        String SERVER = "ssl://liveobjects.orange-business.com:8883";
         String DEVICE_URN = "urn:lo:nsid:sensor:XX56765";
         int KEEP_ALIVE_INTERVAL = 30;// Must be <= 50
 
